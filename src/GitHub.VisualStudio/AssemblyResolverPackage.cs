@@ -112,15 +112,14 @@ namespace GitHub.VisualStudio
 
         void WriteToLog()
         {
-            var log = LogManager.GetCurrentClassLogger();
             foreach (var resolvedAssembly in resolvingAssemblies)
             {
-                log.Info(CultureInfo.InvariantCulture, "Resolved '{0}' to '{1}'.", resolvedAssembly.Key, resolvedAssembly.Value.Location);
+                log.Information("Resolved '{Key}' to '{Location}'.", resolvedAssembly.Key, resolvedAssembly.Value.Location);
             }
 
             foreach (var resolvingException in resolvingExceptions)
             {
-                log.Error(CultureInfo.InvariantCulture, "Error occurred loading '{0}' from '{1}'.\n{2}", resolvingException.Key, packageFolder, resolvingException.Value);
+                log.Error(resolvingException.Value, "Error occurred loading '{Key}' from '{PackageFolder}'.", resolvingException.Key, packageFolder);
             }
         }
     }
