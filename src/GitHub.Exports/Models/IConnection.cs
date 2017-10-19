@@ -1,17 +1,15 @@
-﻿using GitHub.Primitives;
-using System;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Threading.Tasks;
+﻿using System;
+using GitHub.Primitives;
+using Octokit;
 
 namespace GitHub.Models
 {
-    public interface IConnection : IDisposable
+    public interface IConnection
     {
         HostAddress HostAddress { get; }
         string Username { get; }
-        IObservable<IConnection> Login();
-        void Logout();
-        ObservableCollection<ILocalRepositoryModel> Repositories { get; }
+        User User { get; }
+        bool IsLoggedIn { get; }
+        Exception ConnectionError { get; }
     }
 }

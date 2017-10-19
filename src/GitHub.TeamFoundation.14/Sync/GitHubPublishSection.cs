@@ -68,7 +68,7 @@ namespace GitHub.VisualStudio.TeamExplorer.Sync
             {
                 IsVisible = true;
                 ShowGetStarted = true;
-                loggedIn = await connectionManager.IsLoggedIn(hosts);
+                loggedIn = await connectionManager.IsLoggedIn();
                 ShowLogin = !loggedIn;
                 ShowSignup = !loggedIn;
             }
@@ -91,7 +91,7 @@ namespace GitHub.VisualStudio.TeamExplorer.Sync
 
         public async Task Connect()
         {
-            loggedIn = await connectionManager.IsLoggedIn(hosts);
+            loggedIn = await connectionManager.IsLoggedIn();
             if (loggedIn)
                 ShowPublish();
             else
@@ -176,7 +176,7 @@ namespace GitHub.VisualStudio.TeamExplorer.Sync
             var uiProvider = ServiceProvider.GetService<IUIProvider>();
             uiProvider.RunInDialog(UIControllerFlow.Authentication);
 
-            loggedIn = await connectionManager.IsLoggedIn(hosts);
+            loggedIn = await connectionManager.IsLoggedIn();
             if (loggedIn)
                 ShowPublish();
         }

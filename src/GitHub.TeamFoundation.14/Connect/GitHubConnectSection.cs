@@ -191,20 +191,20 @@ namespace GitHub.VisualStudio.TeamExplorer.Connect
             }
             else
             {
-                if (connection != SectionConnection)
-                {
-                    SectionConnection = connection;
-                    Repositories = SectionConnection.Repositories.CreateDerivedCollection(x => x,
-                                        orderer: OrderedComparer<ILocalRepositoryModel>.OrderBy(x => x.Name).Compare);
-                    Repositories.CollectionChanged += UpdateRepositoryList;
-                    Title = connection.HostAddress.Title;
-                    IsVisible = true;
-                    LoggedIn = true;
-                    settings = packageSettings.UIState.GetOrCreateConnectSection(Title);
-                    IsExpanded = settings.IsExpanded;
-                }
-                if (TEServiceProvider != null)
-                    RefreshRepositories().Forget();
+                ////if (connection != SectionConnection)
+                ////{
+                ////    SectionConnection = connection;
+                ////    Repositories = SectionConnection.Repositories.CreateDerivedCollection(x => x,
+                ////                        orderer: OrderedComparer<ILocalRepositoryModel>.OrderBy(x => x.Name).Compare);
+                ////    Repositories.CollectionChanged += UpdateRepositoryList;
+                ////    Title = connection.HostAddress.Title;
+                ////    IsVisible = true;
+                ////    LoggedIn = true;
+                ////    settings = packageSettings.UIState.GetOrCreateConnectSection(Title);
+                ////    IsExpanded = settings.IsExpanded;
+                ////}
+                ////if (TEServiceProvider != null)
+                ////    RefreshRepositories().Forget();
             }
         }
 
@@ -364,12 +364,13 @@ namespace GitHub.VisualStudio.TeamExplorer.Connect
 #endif
         }
 
-        async Task RefreshRepositories()
+        Task RefreshRepositories()
         {
+            return Task.CompletedTask;
             // TODO: This is wasteful as we can be calling it multiple times for a single changed
             // signal, once from each section. Needs refactoring.
-            await connectionManager.RefreshRepositories();
-            RaisePropertyChanged("Repositories"); // trigger a re-check of the visibility of the listview based on item count
+            ////await connectionManager.RefreshRepositories();
+            ////RaisePropertyChanged("Repositories"); // trigger a re-check of the visibility of the listview based on item count
         }
 
         public void DoCreate()
@@ -379,7 +380,7 @@ namespace GitHub.VisualStudio.TeamExplorer.Connect
 
         public void SignOut()
         {
-            SectionConnection.Logout();
+            ////SectionConnection.Logout();
         }
 
         public void Login()

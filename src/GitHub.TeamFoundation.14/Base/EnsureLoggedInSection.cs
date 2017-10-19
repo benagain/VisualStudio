@@ -52,7 +52,7 @@ namespace GitHub.VisualStudio.TeamExplorer.Sync
 
             teServices.ClearNotifications();
             var add = HostAddress.Create(ActiveRepoUri);
-            bool loggedIn = await connectionManager.IsLoggedIn(hosts, add);
+            bool loggedIn = await connectionManager.IsLoggedIn(add);
             if (!loggedIn)
             {
                 var msg = string.Format(CultureInfo.CurrentUICulture, Resources.NotLoggedInMessage, add.Title, add.Title);
